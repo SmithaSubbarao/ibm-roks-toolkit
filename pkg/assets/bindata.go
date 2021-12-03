@@ -62,6 +62,7 @@
 // assets/oauth-openshift/oauth-server-secret.yaml
 // assets/oauth-openshift/oauth-server-service.yaml
 // assets/oauth-openshift/oauth-server-sessionsecret-secret.yaml
+// assets/oauth-openshift/oauth-serving-cert-configmap.yaml
 // assets/oauth-openshift/v4-0-config-system-branding.yaml
 // assets/oauth-openshift/v4-0-config-system-session.json
 // assets/openshift-apiserver/config.yaml
@@ -4454,6 +4455,31 @@ func oauthOpenshiftOauthServerSessionsecretSecretYaml() (*asset, error) {
 	return a, nil
 }
 
+var _oauthOpenshiftOauthServingCertConfigmapYaml = []byte(`apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth-serving-cert
+  namespace: openshift-config-managed
+data:
+  ca-bundle.crt: |-
+{{ include_pki "root-ca.crt" 4 }}
+`)
+
+func oauthOpenshiftOauthServingCertConfigmapYamlBytes() ([]byte, error) {
+	return _oauthOpenshiftOauthServingCertConfigmapYaml, nil
+}
+
+func oauthOpenshiftOauthServingCertConfigmapYaml() (*asset, error) {
+	bytes, err := oauthOpenshiftOauthServingCertConfigmapYamlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "oauth-openshift/oauth-serving-cert-configmap.yaml", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _oauthOpenshiftV40ConfigSystemBrandingYaml = []byte(`apiVersion: v1
 kind: Secret
 metadata:
@@ -6093,6 +6119,7 @@ var _bindata = map[string]func() (*asset, error){
 	"oauth-openshift/oauth-server-secret.yaml":                                           oauthOpenshiftOauthServerSecretYaml,
 	"oauth-openshift/oauth-server-service.yaml":                                          oauthOpenshiftOauthServerServiceYaml,
 	"oauth-openshift/oauth-server-sessionsecret-secret.yaml":                             oauthOpenshiftOauthServerSessionsecretSecretYaml,
+	"oauth-openshift/oauth-serving-cert-configmap.yaml":                                  oauthOpenshiftOauthServingCertConfigmapYaml,
 	"oauth-openshift/v4-0-config-system-branding.yaml":                                   oauthOpenshiftV40ConfigSystemBrandingYaml,
 	"oauth-openshift/v4-0-config-system-session.json":                                    oauthOpenshiftV40ConfigSystemSessionJson,
 	"openshift-apiserver/config.yaml":                                                    openshiftApiserverConfigYaml,
@@ -6246,6 +6273,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"oauth-server-secret.yaml":               {oauthOpenshiftOauthServerSecretYaml, map[string]*bintree{}},
 		"oauth-server-service.yaml":              {oauthOpenshiftOauthServerServiceYaml, map[string]*bintree{}},
 		"oauth-server-sessionsecret-secret.yaml": {oauthOpenshiftOauthServerSessionsecretSecretYaml, map[string]*bintree{}},
+		"oauth-serving-cert-configmap.yaml":      {oauthOpenshiftOauthServingCertConfigmapYaml, map[string]*bintree{}},
 		"v4-0-config-system-branding.yaml":       {oauthOpenshiftV40ConfigSystemBrandingYaml, map[string]*bintree{}},
 		"v4-0-config-system-session.json":        {oauthOpenshiftV40ConfigSystemSessionJson, map[string]*bintree{}},
 	}},
